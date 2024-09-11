@@ -36,3 +36,4 @@ Function
 ## Operadores
 
 Operador de atribuição de valor
+Operador de concatenação
