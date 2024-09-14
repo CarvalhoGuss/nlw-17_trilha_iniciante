@@ -32,7 +32,7 @@ const listarMetas = async () => {
         return
     }
 
-    metas.ferEach((m) => {
+    metas.forEach((m) => {
         m.checked = false
     })
 
@@ -45,6 +45,23 @@ const listarMetas = async () => {
     })
 
     console.log('Meta(s) marcadas como concluída(s)')
+}
+
+
+const metasRealizadas = async () => {
+    const realizadas = metas.filter((meta) => {
+        return meta.checked
+    })
+
+    if(realizadas.length == 0) {
+        console.log('Não existem metas realizadas! :(')
+        return
+    }
+
+    await select({
+        message: "Metas Realizadas",
+        choices: [...realizadas]
+    })
 }
 
 const start = async () => {
@@ -63,6 +80,10 @@ const start = async () => {
                     value: "listar"
                 },
                 {
+                    name: "Metas realizadas",
+                    value: "realizadas"
+                },
+                {
                     name: "Sair",
                     value: "sair"
                 }
@@ -78,6 +99,9 @@ const start = async () => {
             case "listar":
                 await listarMetas()
                 console.log("vamos listar")
+                break
+            case "realizadas":
+                await metasRealizadas ()
                 break
             case "sair":
                 return
